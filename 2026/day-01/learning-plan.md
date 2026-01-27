@@ -2,24 +2,24 @@ Today’s goal is to set the foundation for your DevOps journey.
 
 - What is your understanding of DevOps and Cloud Engineering?
 
-At somewhat I can say I already have good overview about the Cloud services and I am 5x Microsoft certified and 2x GitHub Certified. And I got to introduce to Devops during my Learning journey of getting certified.
+  At somewhat I can say I already have good overview about the Cloud services and I am 5x Microsoft certified and 2x GitHub Certified. And I got to introduce to Devops during my Learning journey of getting certified.
 
-Yet, I am in process to learn more.
+  Yet, I am in process to learn more.
 - Why you are starting learning DevOps & Cloud?
 
-I started this DevOps journey to brush up my current skills and builed new skills to become Production ready Devops Engineer.
+  I started this DevOps journey to brush up my current skills and builed new skills to become Production ready Devops Engineer.
 
 - Where do you want to reach?
 
-Not sure what will gonna what happen in the future, but we must carry a goal or destiniation to do hustle to get their.
+  Not sure what will gonna what happen in the future, but we must carry a goal or destiniation to do hustle to get their.
 
-I will be a great Devops Engineer.
+  I will be a great Devops Engineer.
 - How you will stay consistent every single day?
 
-I have commitment to myself that this is it.
-That's I what excite me and i want to learn.
+  I have commitment to myself that this is it.
+  That's I what excite me and i want to learn.
 
-So I will continue to contribute each day even if it is a little bit I will do it.
+  So I will continue to contribute each day even if it is a little bit I will do it.
 
 This is not a generic plan.  
 This is your **career execution blueprint** for the next 90 days.
