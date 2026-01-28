@@ -1,3 +1,5 @@
+### TASK 1
+---
 Today’s goal is to set the foundation for your DevOps journey.
 
 - What is your understanding of DevOps and Cloud Engineering?
