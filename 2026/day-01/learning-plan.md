@@ -1,4 +1,4 @@
-### TASK 1
+## TASK 1
 ---
 Today’s goal is to set the foundation for your DevOps journey.
 
