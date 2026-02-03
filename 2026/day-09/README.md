@@ -60,6 +60,7 @@ Assign users:
 3. Set permissions to `775` (rwxrwxr-x)
 4. Test by creating files as `tokyo` and `berlin`
 
+
 **Verify:** Check permissions and test file creation
 
 ---
@@ -72,8 +73,6 @@ Assign users:
 4. Create `/opt/team-workspace` directory
 5. Set group to `project-team`, permissions to `775`
 6. Test by creating file as `nairobi`
-
----
 
 ## Hints
 
