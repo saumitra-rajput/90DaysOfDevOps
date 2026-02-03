@@ -76,8 +76,17 @@ systemctl status nginx
 
 **Step 2:** If service is not found, list all services
 ```bash
-systemctl list-units --type=service
+systemctl list-units | grep docker
+
 ```
+![alt text](image.png)
+
+```bash
+systemctl list-unit-files | grep docker
+
+```
+![alt text](image-1.png)
+
 **Why this command?** To see what services exist on the system
 
 **Step 3:** Check if service is enabled on boot
@@ -134,12 +143,14 @@ You SSH into the server. What commands would you run to identify
 which process is using high CPU?
 ```
 
+
 **Hint:**
 - Use a command that shows **live** CPU usage
 - Look for processes sorted by CPU percentage
 - Note the PID (Process ID) of the top process
 
 **Commands to explore:** `top` (press 'q' to quit), `htop`, `ps aux --sort=-%cpu | head -10`
+![alt text](image-2.png)
 
 **Resource:** Review Day 05 (Troubleshooting Drill - CPU & Memory section)
 
@@ -162,13 +173,15 @@ What commands would you use?
 ```bash
 # Check service status first
 systemctl status ssh
-
+![alt text](image-5.png)
 # View last 50 lines of logs
 journalctl -u ssh -n 50
+![alt text](image-4.png)
 
 # Follow logs in real-time
 journalctl -u ssh -f
 ```
+![alt text](image-3.png)
 
 **Resource:** Review Day 04 (Process and Services - Log checks section)
 
