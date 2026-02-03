@@ -86,7 +86,7 @@ systemctl status nginx
 
 **Step 2:** If service is not found, list all services
 ```bash
-systemctl list-units --type=service
+systemctl list-units | grep service
 ```
 **Why this command?** To see what services exist on the system
 
