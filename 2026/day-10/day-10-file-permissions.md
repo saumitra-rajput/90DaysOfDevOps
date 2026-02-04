@@ -66,3 +66,6 @@ Answer: What are current permissions? Who can read/write/execute?
 3. Document the error messages
 
 ---
+Permissions: chmod +x, chmod -w, chmod 755
+
+![alt text]({6569EF42-9ED0-4B60-97B8-01A078299AF9}.png)
