@@ -14,7 +14,6 @@ Figure out how to:
 ### Task 1: Create Users (20 minutes)
 ![alt text]({4A270CED-D865-40CC-BE57-F36BCC506609}.png)
 
-
 Create three users with home directories and passwords:
 - `tokyo`
 ![alt text]({1E3A7943-7E26-49F0-9AA6-88009E6A4DA4}.png)
