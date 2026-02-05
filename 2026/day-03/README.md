@@ -36,6 +36,7 @@ Follow these rules while creating your cheat sheet:
 
 ---
 
+
 ## Resources
 You may refer to:
 
