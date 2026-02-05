@@ -4,7 +4,6 @@
 ---
 
 
-
 ## Guidelines
 Follow these rules while creating your practice note:
 
