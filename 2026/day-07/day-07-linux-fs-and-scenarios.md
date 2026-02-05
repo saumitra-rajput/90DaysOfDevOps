@@ -143,7 +143,6 @@ You SSH into the server. What commands would you run to identify
 which process is using high CPU?
 ```
 
-
 **Hint:**
 - Use a command that shows **live** CPU usage
 - Look for processes sorted by CPU percentage
