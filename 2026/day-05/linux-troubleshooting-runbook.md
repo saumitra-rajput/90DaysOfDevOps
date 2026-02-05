@@ -50,3 +50,4 @@ Follow these rules while creating your runbook:
 
     - tail -n 50 /var/log/logfilename
     - journalctl -u <service> -n 50
+    
