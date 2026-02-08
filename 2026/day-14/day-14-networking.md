@@ -57,6 +57,7 @@ ubuntu@ip-172-31-19-31:~/networking$ tracepath google.com
 
 ![alt text](image-6.png)
 - **Connections snapshot:** `netstat -an | head` — count ESTABLISHED vs LISTEN (rough).
+![alt text](image-7.png)
 
 Pick one target service/host (e.g., `google.com`, your lab server, or a local service) and stick to it for ping/traceroute/curl where possible.
 
@@ -64,8 +65,19 @@ Pick one target service/host (e.g., `google.com`, your lab server, or a local se
 
 ## Mini Task: Port Probe & Interpret
 1) Identify one listening port from `ss -tulpn` (e.g., SSH on 22 or a local web app).  
+
+```
+tcp        LISTEN      0           4096                       0.0.0.0:22                  0.0.0.0:*         users:(("sshd",pid=862,fd=3),("systemd",pid=1,fd=87))      
+tcp        LISTEN      0           4096                 127.0.0.53%lo:53                  0.0.0.0:*         users:(("systemd-resolve",pid=340,fd=15))                  
+tcp        LISTEN      0           4096                    127.0.0.54:53                  0.0.0.0:*         users:(("systemd-resolve",pid=340,fd=17))                  
+tcp        LISTEN      0           4096                          [::]:22                     [::]:*         users:(("sshd",pid=862,fd=4),("systemd",pid=1,fd=88)) 
+```
+
 2) From the same machine, test it: `nc -zv localhost <port>` (or `curl -I http://localhost:<port>`).  
+
+![alt text](image-8.png)
 3) Write one line: is it reachable? If not, what’s the next check? (e.g., service status, firewall).
+Yes
 
 ---
 
