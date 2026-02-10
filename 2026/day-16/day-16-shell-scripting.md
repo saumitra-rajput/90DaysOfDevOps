@@ -2,7 +2,6 @@
 
 ## Task
 
-
 ---
 
 ## Challenge Tasks
@@ -17,9 +16,11 @@
 chmod +x hello.sh
 ./hello.sh
 ```
+![alt text](image.png)
 
 **Document:** What happens if you remove the shebang line?
-
+![alt text](image-1.png)
+Still working
 ---
 
 ### Task 2: Variables
@@ -28,7 +29,7 @@ chmod +x hello.sh
    - A variable for your `ROLE` (e.g., "DevOps Engineer")
    - Print: `Hello, I am <NAME> and I am a <ROLE>`
 2. Try using single quotes vs double quotes — what's the difference?
-
+![alt text](image-2.png)
 ---
 
 ### Task 3: User Input with read
@@ -36,7 +37,7 @@ chmod +x hello.sh
    - Asks the user for their name using `read`
    - Asks for their favourite tool
    - Prints: `Hello <name>, your favourite tool is <tool>`
-
+![alt text](image-3.png)
 ---
 
 ### Task 4: If-Else Conditions
@@ -44,11 +45,13 @@ chmod +x hello.sh
    - Takes a number using `read`
    - Prints whether it is **positive**, **negative**, or **zero**
 
+![alt text](image-4.png)
 2. Create `file_check.sh` that:
    - Asks for a filename
    - Checks if the file **exists** using `-f`
    - Prints appropriate message
 
+![alt text](image-6.png)
 ---
 
 ### Task 5: Combine It All
@@ -58,21 +61,6 @@ Create `server_check.sh` that:
 3. If `y` — runs `systemctl status <service>` and prints whether it's **active** or **not**
 4. If `n` — prints "Skipped."
 
----
-
-## Hints
-- Shebang: `#!/bin/bash` tells the system which interpreter to use
-- Variables: `NAME="Shubham"` (no spaces around `=`)
-- Read: `read -p "Enter name: " NAME`
-- If syntax: `if [ condition ]; then ... elif ... else ... fi`
-- File check: `if [ -f filename ]; then`
-
----
-
-## Documentation
-
-Create `day-16-shell-scripting.md` with:
-- Each script's code and output
-- What you learned (3 key points)
+![alt text](image-5.png)
 
 ---
