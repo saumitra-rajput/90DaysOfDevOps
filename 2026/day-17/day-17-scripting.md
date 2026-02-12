@@ -45,12 +45,14 @@ You will:
    - Accepts a name as `$1`
    - Prints `Hello, <name>!`
    - If no argument is passed, prints "Usage: ./greet.sh <name>"
+   ![alt text](image-3.png)
 
 2. Create `args_demo.sh` that:
    - Prints total number of arguments (`$#`)
    - Prints all arguments (`$@`)
    - Prints the script name (`$0`)
 
+![alt text](image-4.png)
 ---
 
 ### Task 4: Install Packages via Script
@@ -60,6 +62,17 @@ You will:
    - Checks if each package is installed (use `dpkg -s` or `rpm -q`)
    - Installs it if missing, skips if already present
    - Prints status for each package
+   ![alt text](image-7.png)
+
+got error
+![alt text](image-5.png)
+
+error fix
+- forcely kill the process sudo kill -9 PID
+- check the ps -f | grep pattern
+- remove the swap file 
+ 
+![alt text](image-6.png)
 
 > Run as root: `sudo -i` or `sudo su`
 
@@ -72,6 +85,7 @@ You will:
    - Tries to navigate into it
    - Creates a file inside
    - Uses `||` operator to print an error if any step fails
+   ![alt text](image-8.png)
 
 Example:
 ```bash
@@ -80,6 +94,7 @@ mkdir /tmp/devops-test || echo "Directory already exists"
 
 2. Modify your `install_packages.sh` to check if the script is being run as root — exit with a message if not.
 
+![alt text](image-9.png)
 ---
 
 ## Hints
