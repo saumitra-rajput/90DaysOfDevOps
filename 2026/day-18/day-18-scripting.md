@@ -70,7 +70,9 @@ Create `system_info.sh` that uses functions for everything:
 6. A `main` function that calls all of the above with section headers
 7. Use `set -euo pipefail` at the top
 
-![alt text](image-4.png)
+![0](image-4.png) took help from GPT
+
+![alt text](image-5.png) my own script
 Output should look clean and readable.
 
 ---
