@@ -24,7 +24,7 @@ You will:
 1. Verify Git is installed on your machine
 2. Set up your Git identity — name and email
 3. Verify your configuration
-
+![alt text](image-2.png)
 ---
 
 ### Task 2: Create Your Git Project
@@ -32,6 +32,10 @@ You will:
 2. Initialize it as a Git repository
 3. Check the status — read and understand what Git is telling you
 4. Explore the hidden `.git/` directory — look at what's inside
+
+![alt text](image.png)
+
+![alt text](image-1.png)
 
 ---
 
@@ -44,7 +48,7 @@ You will:
 3. For each command, write:
    - What it does (1 line)
    - An example of how to use it
-
+![alt text](image-3.png)
 ---
 
 ### Task 4: Stage and Commit
@@ -61,17 +65,24 @@ You will:
 3. Stage and commit again with a different, descriptive message
 4. Repeat this process at least **3 times** so you have multiple commits in your history
 5. View the full history in a compact format
-
+![alt text](image-4.png)
 ---
 
 ### Task 6: Understand the Git Workflow
 Answer these questions in your own words (add them to a `day-22-notes.md` file):
 1. What is the difference between `git add` and `git commit`?
+- git add include the changes in staging area
+- git commit create a history point where the changes are occured and saved
 2. What does the **staging area** do? Why doesn't Git just commit directly?
-3. What information does `git log` show you?
-4. What is the `.git/` folder and what happens if you delete it?
-5. What is the difference between a **working directory**, **staging area**, and **repository**?
+- staging area : to manage the files which you want to get added in the point in time history (commit) without disturbing other files which are still in progress
+3. What information does `git log` show you? : details about author, hash, commit, head
+4. What is the `.git/` folder and what happens if you delete it? it defines that dir is a git repo and has imp dir/files like branches, hook, HEAD, logs
+5. What is the difference between a 
+- **working directory**: where you are working and doing change in file or folder
+- **staging area**: acts as a rough draft space: think of cricket team room where people sit and decided if they will play
+- **repository**: is specific copy or version control space where you store files and folder with the point in time history.
 
+![alt text](image-5.png)
 ---
 
 ## Ongoing Task
