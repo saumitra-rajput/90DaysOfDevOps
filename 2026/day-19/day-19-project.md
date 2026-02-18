@@ -14,7 +14,7 @@ Create `log_rotate.sh` that:
 3. Deletes `.gz` files older than 30 days
 4. Prints how many files were compressed and deleted
 5. Exits with an error if the directory doesn't exist
-
+![alt text](image-1.png)
 ---
 
 ### Task 2: Server Backup Script
@@ -26,6 +26,7 @@ Create `backup.sh` that:
 5. Deletes backups older than 14 days from the destination
 6. Handles errors — exit if source doesn't exist
 
+![alt text](image.png)
 ---
 
 ### Task 3: Crontab
@@ -62,7 +63,9 @@ Create `maintenance.sh` that:
 - Tar: `tar -czf backup.tar.gz /source/dir`
 - Cron edit: `crontab -e`
 - Log with timestamp: `echo "$(date): message" >> logfile`
+- my custom crontab job
 
+![alt text](image-2.png)
 ---
 
 ## Documentation
