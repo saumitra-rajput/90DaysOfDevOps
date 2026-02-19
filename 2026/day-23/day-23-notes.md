@@ -36,23 +36,40 @@ In your `devops-git-practice` repo, perform the following:
 4. Push `feature-1` branch to GitHub
 5. Verify both branches are visible on GitHub
 6. Answer in your notes: What is the difference between `origin` and `upstream`?
+Feature What is it?		
 
+- origin: Your fork / Your personal copy	
+- upstream: The original, main project
+
+![alt text](image-1.png)
 ---
 
 ### Task 4: Pull from GitHub
 1. Make a change to a file **directly on GitHub** (use the GitHub editor)
 2. Pull that change to your local repo
 3. Answer in your notes: What is the difference between `git fetch` and `git pull`?
-
+![alt text](image-2.png)
 ---
 
 ### Task 5: Clone vs Fork
-1. **Clone** any public repository from GitHub to your local machine
+1. **Clone** any public repository from GitHub to your local machine 
+
 2. **Fork** the same repository on GitHub, then clone your fork
 3. Answer in your notes:
    - What is the difference between clone and fork?
+   clone is copying the remote repo on local machine
+
+   fork copy of remote repo on your gh repo (no write access to original repo)
    - When would you clone vs fork?
+   for working localing use clone
+
+   No write access: You want to contribute to a public open-source project.
+   Experimentation: You want to make changes or experiment without affecting the original project.
+
+   for 
    - After forking, how do you keep your fork in sync with the original repo?
+   by selecing option sync fork(which work on ff concept fast forward )
+![alt text](image-3.png)
 
 ---
 
