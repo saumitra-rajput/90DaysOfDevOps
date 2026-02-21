@@ -1,5 +1,7 @@
 # Day 27 – GitHub Profile Makeover: Build Your Developer Identity
 
+My GitHub Profile : [Link](https://github.com/saumitra-rajput)
+
 ## Task
 
 ---
@@ -16,6 +18,7 @@ Before making changes, assess where you stand:
    - Do your repos have descriptions, or are they blank?
    - Would a recruiter understand what you've been working on?
 
+Working on it
 ---
 
 ### Task 2: Create Your Profile README
