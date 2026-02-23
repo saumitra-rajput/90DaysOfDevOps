@@ -31,8 +31,21 @@ Draw or describe the Docker architecture in your own words.
 ### Task 2: Install Docker
 1. Install Docker on your machine (or use a cloud instance)
 2. Verify the installation
+
+![alt text](image.png)
+Adding server user to docker group
+```
+cat /etc/group | head -5
+sudo usermod -aG docker ubuntu
+cat /etc/group | head -5
+run again docker ps
+it will work
+```
+![alt text](image-1.png)
 3. Run the `hello-world` container
+![alt text](image-2.png)
 4. Read the output carefully — it explains what just happened
+![alt text](image-3.png)
 
 ---
 
