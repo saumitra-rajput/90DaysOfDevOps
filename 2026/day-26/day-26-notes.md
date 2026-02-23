@@ -23,6 +23,8 @@ Every time you switch to the browser to create a PR, check an issue, or manage a
 ### Task 2: Working with Repositories
 1. Create a **new GitHub repo** directly from the terminal — make it public with a README
 2. Clone a repo using `gh` instead of `git clone`
+
+![alt text](image-4.png)
 3. View details of one of your repos from the terminal
 4. List all your repositories
 5. Open a repo in your browser directly from the terminal
