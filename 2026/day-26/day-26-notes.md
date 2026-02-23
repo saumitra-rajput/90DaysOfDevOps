@@ -10,6 +10,7 @@ Every time you switch to the browser to create a PR, check an issue, or manage a
 
 ### Task 1: Install and Authenticate
 1. Install the GitHub CLI on your machine
+![alt text](image.png)
 2. Authenticate with your GitHub account
 3. Verify you're logged in and check which account is active
 4. Answer in your notes: What authentication methods does `gh` support?
