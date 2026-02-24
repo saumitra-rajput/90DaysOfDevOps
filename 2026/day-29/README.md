@@ -51,11 +51,14 @@ it will work
 
 ### Task 3: Run Real Containers
 1. Run an **Nginx** container and access it in your browser
+![alt text](image-5.png)
 2. Run an **Ubuntu** container in interactive mode — explore it like a mini Linux machine
+
 3. List all running containers
 4. List all containers (including stopped ones)
 5. Stop and remove a container
-
+Done
+![alt text](image-4.png)
 ---
 
 ### Task 4: Explore
@@ -63,6 +66,7 @@ it will work
 2. Give a container a custom **name**
 3. Map a **port** from the container to your host
 4. Check **logs** of a running container
+![alt text](image-6.png)
 5. Run a command **inside** a running container
 
 ---
