@@ -71,6 +71,7 @@ docker inspect --format='{{.NetworkSettings.IPAddress}}' abd
 
 ``` docker system df ```
 ``` docker system df -v ```
+
 ---
 
 ## Hints
