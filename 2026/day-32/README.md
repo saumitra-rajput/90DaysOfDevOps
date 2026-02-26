@@ -17,20 +17,32 @@ Containers are ephemeral — they lose data when removed. And by default, contai
 
 ### Task 1: The Problem
 1. Run a Postgres or MySQL container
+![alt text](image.png)
 2. Create some data inside it (a table, a few rows — anything)
-3. Stop and remove the container
+3. Stop and remove the 
+![alt text](image-1.png)
 4. Run a new one — is your data still there?
-
+No
 Write what happened and why.
 
 ---
 
 ### Task 2: Named Volumes
 1. Create a named volume
+![alt text](image-2.png)
 2. Run the same database container, but this time **attach the volume** to it
+![alt text](image-3.png)
 3. Add some data, stop and remove the container
+![alt text](image-4.png)
+![alt text](image-5.png)
 4. Run a brand new container with the **same volume**
+![alt text](image-6.png)
 5. Is the data still there?
+Yes in stopped state
+
+- when we try to attach the same volume to a different sql server it get attached but stopped other container which are using the same volume.
+- resolution use different volumes
+
 
 **Verify:** `docker volume ls`, `docker volume inspect`
 
@@ -44,6 +56,7 @@ Write what happened and why.
 
 Write in your notes: What is the difference between a named volume and a bind mount?
 
+![alt text](image-7.png)
 ---
 
 ### Task 4: Docker Networking Basics
@@ -57,9 +70,13 @@ Write in your notes: What is the difference between a named volume and a bind mo
 ### Task 5: Custom Networks
 1. Create a custom bridge network called `my-app-net`
 2. Run two containers on `my-app-net`
+![alt text](image-8.png)
 3. Can they ping each other by **name** now?
-4. Write in your notes: Why does custom networking allow name-based communication but the default bridge doesn't?
+yes it is working with both name and containerID only for bridge network
 
+no, not with contID, name, IP nothing only works with the container with same bridge network
+Write in your notes: Why does custom networking allow name-based communication but the default bridge doesn't?
+![alt text](image-9.png)
 ---
 
 ### Task 6: Put It Together
