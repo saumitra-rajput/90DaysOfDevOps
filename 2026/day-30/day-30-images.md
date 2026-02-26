@@ -1,7 +1,5 @@
 # Day 30 – Docker Images & Container Lifecycle
 
-
-
 ## Task
 Today's goal is to **understand how images and containers actually work**.
 
@@ -9,12 +7,6 @@ You will:
 - Learn the relationship between images and containers
 - Understand image layers and caching
 - Master the full container lifecycle
-
----
-
-## Expected Output
-- A markdown file: `day-30-images.md`
-- Screenshots of key commands
 
 ---
 
@@ -27,12 +19,14 @@ You will:
 4. Inspect an image — what information can you see?
 5. Remove an image you no longer need
 
+![alt text](image.png)
 ---
 
 ### Task 2: Image Layers
 1. Run `docker image history nginx` — what do you see?
 2. Each line is a **layer**. Note how some layers show sizes and some show 0B
 3. Write in your notes: What are layers and why does Docker use them?
+![alt text](image-1.png)
 
 ---
 
@@ -54,19 +48,29 @@ Check `docker ps -a` after each step — observe the state changes.
 ### Task 4: Working with Running Containers
 1. Run an Nginx container in detached mode
 2. View its **logs**
-3. View **real-time logs** (follow mode)
+![alt text](image-2.png)
+3. View **real-time logs** (follow mode) ``` watch docker logs contID```
 4. **Exec** into the container and look around the filesystem
 5. Run a single command inside the container without entering it
 6. **Inspect** the container — find its IP address, port mappings, and mounts
-
+![alt text](image-3.png)
+```
+docker inspect --format='{{.NetworkSettings.IPAddress}}' abd
+```
 ---
 
 ### Task 5: Cleanup
 1. Stop all running containers in one command
 2. Remove all stopped containers in one command
-3. Remove unused images
-4. Check how much disk space Docker is using
 
+![alt text](image-4.png)
+3. Remove unused images
+![alt text](image-5.png)
+4. Check how much disk space Docker is using
+![alt text](image-6.png)
+
+``` docker system df ```
+``` docker system df -v ```
 ---
 
 ## Hints
