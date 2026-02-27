@@ -71,6 +71,7 @@ Write in your notes: What is the difference between a named volume and a bind mo
 1. Create a custom bridge network called `my-app-net`
 2. Run two containers on `my-app-net`
 ![alt text](image-8.png)
+
 3. Can they ping each other by **name** now?
 yes it is working with both name and containerID only for bridge network
 
@@ -81,9 +82,26 @@ Write in your notes: Why does custom networking allow name-based communication b
 
 ### Task 6: Put It Together
 1. Create a custom network
+![alt text](image-10.png)
 2. Run a **database container** (MySQL/Postgres) on that network with a volume for data
+- created container sql: ``` docker run -itd --network ironman --volume dbdata:/var/lib/mysql --name irondb -e MYSQL_ROOT_PASSWORD=test123 mysql:latest ```
+![alt text](image-11.png)
+
 3. Run an **app container** (use any image) on the same network
+
+created container nginx: ```  docker run -itd --network ironman --name ironapp nginx:latest ```
+![alt text](image-12.png)
+
+get into container and install ping :
+```
+ docker exec -it a2f bash
+ apt-get update && apt install iputils-ping -y
+ ```
+
 4. Verify the app container can reach the database by container name
+![alt text](image-13.png)
+
+Ping worked : with name and contID
 
 ---
 
