@@ -6,3 +6,123 @@ Today's goal is to **solve two real problems: data persistence and container com
 Containers are ephemeral — they lose data when removed. And by default, containers can't easily talk to each other. Today you fix both.
 
 ---
+
+## Expected Output
+- A markdown file: `day-32-volumes-networking.md`
+- Screenshots of your experiments
+
+---
+
+## Challenge Tasks
+
+### Task 1: The Problem
+1. Run a Postgres or MySQL container
+![alt text](image.png)
+2. Create some data inside it (a table, a few rows — anything)
+3. Stop and remove the 
+![alt text](image-1.png)
+4. Run a new one — is your data still there?
+No
+Write what happened and why.
+
+---
+
+### Task 2: Named Volumes
+1. Create a named volume
+![alt text](image-2.png)
+2. Run the same database container, but this time **attach the volume** to it
+![alt text](image-3.png)
+3. Add some data, stop and remove the container
+![alt text](image-4.png)
+![alt text](image-5.png)
+4. Run a brand new container with the **same volume**
+![alt text](image-6.png)
+5. Is the data still there?
+Yes in stopped state
+
+- when we try to attach the same volume to a different sql server it get attached but stopped other container which are using the same volume.
+- resolution use different volumes
+
+
+**Verify:** `docker volume ls`, `docker volume inspect`
+
+---
+
+### Task 3: Bind Mounts
+1. Create a folder on your host machine with an `index.html` file
+2. Run an Nginx container and **bind mount** your folder to the Nginx web directory
+3. Access the page in your browser
+4. Edit the `index.html` on your host — refresh the browser
+
+Write in your notes: What is the difference between a named volume and a bind mount?
+
+![alt text](image-7.png)
+---
+
+### Task 4: Docker Networking Basics
+1. List all Docker networks on your machine
+2. Inspect the default `bridge` network
+3. Run two containers on the default bridge — can they ping each other by **name**?
+4. Run two containers on the default bridge — can they ping each other by **IP**?
+
+---
+
+### Task 5: Custom Networks
+1. Create a custom bridge network called `my-app-net`
+2. Run two containers on `my-app-net`
+![alt text](image-8.png)
+
+3. Can they ping each other by **name** now?
+yes it is working with both name and containerID only for bridge network
+
+no, not with contID, name, IP nothing only works with the container with same bridge network
+Write in your notes: Why does custom networking allow name-based communication but the default bridge doesn't?
+![alt text](image-9.png)
+---
+
+### Task 6: Put It Together
+1. Create a custom network
+![alt text](image-10.png)
+2. Run a **database container** (MySQL/Postgres) on that network with a volume for data
+- created container sql: ``` docker run -itd --network ironman --volume dbdata:/var/lib/mysql --name irondb -e MYSQL_ROOT_PASSWORD=test123 mysql:latest ```
+![alt text](image-11.png)
+
+3. Run an **app container** (use any image) on the same network
+
+created container nginx: ```  docker run -itd --network ironman --name ironapp nginx:latest ```
+![alt text](image-12.png)
+
+get into container and install ping :
+```
+ docker exec -it a2f bash
+ apt-get update && apt install iputils-ping -y
+ ```
+
+4. Verify the app container can reach the database by container name
+![alt text](image-13.png)
+
+Ping worked : with name and contID
+
+---
+
+## Hints
+- Volumes: `docker volume create`, `-v volume_name:/path`
+- Bind mount: `-v /host/path:/container/path`
+- Networking: `docker network create`, `--network`
+- Ping: `docker exec container1 ping container2`
+
+---
+
+## Submission
+1. Add your `day-32-volumes-networking.md` to `2026/day-32/`
+2. Commit and push to your fork
+
+---
+
+## Learn in Public
+Share what happened when you deleted a container without a volume on LinkedIn. The "aha moment" is real.
+
+`#90DaysOfDevOps` `#DevOpsKaJosh` `#TrainWithShubham`
+
+Happy Learning!
+**TrainWithShubham**
