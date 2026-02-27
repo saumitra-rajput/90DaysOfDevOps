@@ -44,6 +44,7 @@ status: ![alt text](image-4.png)
 Our Mounted volume : ![alt text](image-3.png)
 **Verify:** Stop and restart with `docker compose down` and `docker compose up` — is your WordPress data still there?
 
+checking and working on it
 ---
 
 ### Task 4: Compose Commands
