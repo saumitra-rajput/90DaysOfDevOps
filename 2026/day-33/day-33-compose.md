@@ -45,6 +45,8 @@ Our Mounted volume : ![alt text](image-3.png)
 **Verify:** Stop and restart with `docker compose down` and `docker compose up` — is your WordPress data still there?
 
 checking and working on it
+process: ![alt text](image-6.png)
+working: ![alt text](image-5.png)
 ---
 
 ### Task 4: Compose Commands
@@ -52,8 +54,10 @@ Practice and document these:
 1. Start services in **detached mode**
 2. View running services
 3. View **logs** of all services
+![alt text](image-7.png)
 4. View logs of a **specific** service
 5. **Stop** services without removing
+![alt text](image-8.png)
 6. **Remove** everything (containers, networks)
 7. **Rebuild** images if you make a change
 
