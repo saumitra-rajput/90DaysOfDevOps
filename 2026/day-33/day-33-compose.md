@@ -65,8 +65,16 @@ Practice and document these:
 
 ### Task 5: Environment Variables
 1. Add environment variables directly in your `docker-compose.yml`
+![alt text](image-10.png)
 2. Create a `.env` file and reference variables from it in your compose file
+![alt text](image-9.png)
 3. Verify the variables are being picked up
+
+After running the - docker-compose up -d
+
+env are picked.
+
+![alt text](image-11.png)
 
 ---
 
