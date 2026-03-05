@@ -10,6 +10,7 @@ You'll learn how to **undo mistakes** safely — one of the most important skill
 - A markdown file: `day-25-notes.md` with your observations and answers
 - Continue updating `git-commands.md` in your `devops-git-practice` repo
 
+
 ---
 
 ## Challenge Tasks
