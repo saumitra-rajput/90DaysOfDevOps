@@ -1,0 +1,117 @@
+# ### Task 1: Key-Value Pairs
+# Create `person.yaml` that describes yourself with:
+# - `name`
+# - `role`
+# - `experience_years`
+# - `learning` (a boolean)
+
+name: Saumitra Rajput
+role: Devops Engineer
+experience_years: 4
+Learning: 'yes'
+
+# ### Task 2: Lists
+# Add to `person.yaml`:
+# - `tools` — a list of 5 DevOps tools you know or are learning
+# - `hobbies` — a list using the inline format `[item1, item2]`
+
+# Write in your notes: What are the two ways to write a list in YAML?
+# array method Inline List (Flow Style)
+tools: [Linux,Shell-scripting,Git,Docker,CICD,Kubernetes,Terraform]
+# using - , block style.
+tools:
+  - Linux
+  - Shell-scripting
+  - Git
+  - Docker
+  - CICD
+  - Kubernetes
+  - Terraform
+
+# ### Task 3: Nested Objects
+# Create `server.yaml` that describes a server:
+# - `server` with nested keys: `name`, `ip`, `port`
+# - `database` with nested keys: `host`, `name`, `credentials` (nested further: `user`, `password`)
+
+# **Verify:** Try adding a tab instead of spaces — what happens when you validate it?
+server: 
+  name: nowhere
+  ip: 1.1.22.3
+  port: 235
+databse:
+  host: thor
+  name: thorodinson
+  credentials: 
+    user: thoring
+    password: test123
+
+# ### Task 4: Multi-line Strings
+# In `server.yaml`, add a `startup_script` field using:
+# 1. The `|` block style (preserves newlines)
+# 2. The `>` fold style (folds into one line)
+
+# Write in your notes: When would you use `|` vs `>`?
+
+# 1. The `|` block style (preserves newlines)
+server: 
+  name: nowhere
+  ip: 1.1.22.3
+  port: 235
+startup_script: |
+  #!/bin/bash
+  echo "hello this is block style (preserves new lines)"
+  echo "second line will be print on second line"
+Used for:
+  - Shell scripts:
+  - Config files:
+  - Certificates:
+  - Logs:
+
+# 2. The `>` fold style (folds into one line)
+databse:
+  host: thor
+  name: thorodinson
+  credentials: 
+    user: thoring
+    password: test123
+startup_script:
+  #!/bin/bash
+  echo "This is fold style (more like one paragaraph type output"
+  echo "second will be print in countiounation of first line right after (output - second line)"
+
+Used for:
+  - Long text:
+  - Descriptions:
+  - Messages:
+  - Documentation:
+
+
+# ### Task 5: Validate Your YAML
+# 1. Install `yamllint` or use an online validator
+# 2. Validate both your YAML files
+# 3. Intentionally break the indentation — what error do you get?
+# 4. Fix it and validate again
+
+# had error like similar name fixed it on online yml corrector
+# Map keys must be unique at line 54, column 1
+# fix keep the keys unique.
+
+### Task 6: Spot the Difference
+Read both blocks and write what's wrong with the second one:
+
+```yaml
+# Block 1 - correct
+name: devops
+tools:
+  - docker
+  - kubernetes
+```
+
+```yaml
+# Block 2 - broken
+name: devops
+tools:
+- docker
+  - kubernetes
+```
+# indentation error with first list - docker
