@@ -31,22 +31,24 @@ Create `.github/workflows/hello.yml` with a workflow that:
 4. Has two steps:
    - Step 1: Check out the code using `actions/checkout`
    - Step 2: Print `Hello from GitHub Actions!`
+![alt text](image.png)
 
 Push it. Go to the **Actions** tab on GitHub and watch it run.
 
 **Verify:** Is it green? Click into the job and read every step.
 
+![alt text](image-1.png)
 ---
 
 ### Task 3: Understand the Anatomy
 Look at your workflow file and write in your notes what each key does:
-- `on:`
-- `jobs:`
-- `runs-on:`
-- `steps:`
-- `uses:`
-- `run:`
-- `name:` (on a step)
+- `on:` define triggering option
+- `jobs:` code jobs or steps that will run on during workflow
+- `runs-on:` workflow runner
+- `steps:` indiviual job's with list of commands that will run
+- `uses:` to define which in built gitHub action used in the stage or steps
+- `run:` one line command that will execute on runner
+- `name:` (on a step) tells the jobs stage name ex: code, test, build, deploy, monitor
 
 ---
 
@@ -58,14 +60,15 @@ Update `hello.yml` to also:
 4. Print the runner's operating system
 
 Push again — watch the new run.
-
+![alt text](image-2.png)
 ---
 
 ### Task 5: Break It On Purpose
 1. Add a step that runs a command that will **fail** (e.g., `exit 1` or a misspelled command)
+![alt text](image-3.png)
 2. Push and observe what happens in the Actions tab
 3. Fix it and push again
-
+![alt text](image-4.png)
 Write in your notes: What does a failed pipeline look like? How do you read the error?
 
 ---
