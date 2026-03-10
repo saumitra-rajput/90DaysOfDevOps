@@ -41,6 +41,9 @@ Add steps to:
 3. Push both tags
 
 **Verify:** Go to Docker Hub — is your image there with both tags?
+![alt text](image.png)
+
+![alt text](image-1.png)
 
 ---
 
@@ -49,6 +52,8 @@ Add a condition so the push step only runs on the `main` branch — not on featu
 
 Test it: push to a feature branch and verify the image is built but NOT pushed.
 
+
+
 ---
 
 ### Task 5: Add a Status Badge
@@ -56,6 +61,7 @@ Test it: push to a feature branch and verify the image is built but NOT pushed.
 2. Add it to your `README.md`
 3. Push — the badge should show green
 
+![alt text](image-2.png)
 ---
 
 ### Task 6: Pull and Run It
@@ -64,6 +70,33 @@ Test it: push to a feature branch and verify the image is built but NOT pushed.
 3. Confirm it works
 
 Write in your notes: What is the full journey from `git push` to a running container?
+
+
+**Full Journey: git push → Running Container**
+
+1. Developer pushes code to GitHub
+
+   git push origin main
+
+2. GitHub Actions workflow triggers
+
+3. CI pipeline runs:
+   - checkout code
+   - build Docker image
+   - login to DockerHub
+   - push image to DockerHub
+
+4. Image is stored in DockerHub registry
+
+5. Server pulls the image
+
+   docker pull <username>/repo:<tag>
+
+6. Server runs the container
+
+   docker run -d -p 8080:80 <username>/repo:<tag>
+
+7. Application becomes accessible via browser or API
 
 ---
 
