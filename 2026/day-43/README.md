@@ -23,7 +23,7 @@ Make `test` run only **after** `build` succeeds.
 Make `deploy` run only **after** `test` succeeds.
 
 **Verify:** Check the workflow graph in the Actions tab — does it show the dependency chain?
-
+![alt text](image-1.png)
 ---
 
 ### Task 2: Environment Variables
@@ -35,7 +35,7 @@ In a new workflow, use environment variables at 3 levels:
 Print all three in a single step and verify each is accessible.
 
 Then use a **GitHub context variable** — print the commit SHA and the actor (who triggered the run).
-
+![alt text](image.png)
 ---
 
 ### Task 3: Job Outputs
