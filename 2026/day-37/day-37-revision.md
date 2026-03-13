@@ -8,6 +8,9 @@ Take a **one-day pause** to consolidate everything from Days 29–36 so Docker a
 - A markdown file: `day-37-revision.md` with self-check answers
 
 ---
+![alt text](/2026/day-37/ChatGPT%20Image%20Mar%2013,%202026,%2003_46_30%20PM.png)
+
+![alt text](/2026/day-37/ChatGPT%20Image%20Mar%2013,%202026,%2003_52_47%20PM.png)
 
 ## Self-Assessment Checklist
 Mark yourself honestly — **can do**, **shaky**, or **haven't done**:
