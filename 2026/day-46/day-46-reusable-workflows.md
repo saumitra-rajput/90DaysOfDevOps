@@ -1,8 +1,4 @@
 # Day 46 – Reusable Workflows & Composite Actions
-
-## Task
-You've been writing workflows from scratch every time. In the real world, teams **don't repeat themselves** — they create reusable workflows that any repo can call like a function. Today you learn `workflow_call` and composite actions.
-
 ---
 
 ## Challenge Tasks
@@ -126,3 +122,5 @@ Share how you built your first reusable workflow on LinkedIn — this is a real 
 
 Happy Learning!
 **TrainWithShubham**
+
+>>>>>>> 397ecacafa6ed34b253f8b8b6bbef827d6bb874a
