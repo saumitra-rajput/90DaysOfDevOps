@@ -105,6 +105,7 @@ Create two workflows:
 
 **Verify:** Push a commit — does the test workflow run first, then trigger the deploy workflow?
 
+![alt text](image-5.png)
 ---
 
 ### Task 6: `repository_dispatch` — External Event Triggers
@@ -119,6 +120,25 @@ Create two workflows:
    ```
 
 Write in your notes: When would an external system (like a Slack bot or monitoring tool) trigger a pipeline?
+
+
+What I Learned
+
+repository_dispatch lets external systems trigger a GitHub Actions workflow.
+
+The types filter limits the workflow to a specific custom event name such as deploy-request.
+
+Custom data can be passed using client_payload.
+
+The payload can be accessed inside the workflow with ${{ github.event.client_payload.environment }}.
+
+Notes
+
+The workflow must already exist in the repository for the dispatch event to trigger it.
+
+gh api is usually simpler than curl if GitHub CLI is already authenticated.
+
+With curl, a GitHub token with the required repo permissions is needed.
 
 ---
 
