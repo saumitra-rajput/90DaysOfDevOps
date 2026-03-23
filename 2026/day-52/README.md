@@ -1,267 +1,245 @@
-# Day 52 – Kubernetes Namespaces and Deployments
+# Day 51 – Kubernetes Manifests and Your First Pods
 
 ## Task
-Yesterday you created standalone Pods. The problem? Delete a Pod and it is gone forever — no one recreates it. Today you fix that with Deployments, the real way to run applications in Kubernetes. You will also learn Namespaces, which let you organize and isolate resources inside a cluster.
+Yesterday you set up a cluster. Today you actually deploy something. You will learn the structure of a Kubernetes manifest file and use it to create Pods — the smallest deployable unit in Kubernetes. By the end of today, you should be able to write a Pod definition from scratch without looking at docs.
 
 ---
 
 ## Expected Output
-- At least 2 namespaces created and used
-- A Deployment running with multiple replicas
-- A scaled Deployment and a rolling update performed
-- A markdown file: `day-52-namespaces-deployments.md`
-- Screenshot of `kubectl get deployments` and `kubectl get pods` across namespaces
+- At least 3 Pod manifests written by hand
+- A markdown file: `day-51-pods.md`
+- Screenshot of `kubectl get pods` showing your running pods
+
+---
+
+## The Anatomy of a Kubernetes Manifest
+
+Every Kubernetes resource is defined using a YAML manifest with four required top-level fields:
+
+```yaml
+apiVersion: v1          # Which API version to use
+kind: Pod               # What type of resource
+metadata:               # Name, labels, namespace
+  name: my-pod
+  labels:
+    app: my-app
+spec:                   # The actual specification (what you want)
+  containers:
+  - name: my-container
+    image: nginx:latest
+    ports:
+    - containerPort: 80
+```
+
+- `apiVersion` — tells Kubernetes which API group to use. For Pods, it is `v1`.
+- `kind` — the resource type. Today it is `Pod`. Later you will use `Deployment`, `Service`, etc.
+- `metadata` — the identity of your resource. `name` is required. `labels` are key-value pairs used for organization and selection.
+- `spec` — the desired state. For a Pod, this means which containers to run, which images, which ports, etc.
 
 ---
 
 ## Challenge Tasks
 
-### Task 1: Explore Default Namespaces
-Kubernetes comes with built-in namespaces. List them:
+### Task 1: Create Your First Pod (Nginx)
+Create a file called `nginx-pod.yaml`:
 
-```bash
-kubectl get namespaces
-```
-
-You should see at least:
-- `default` — where your resources go if you do not specify a namespace
-- `kube-system` — Kubernetes internal components (API server, scheduler, etc.)
-- `kube-public` — publicly readable resources
-- `kube-node-lease` — node heartbeat tracking
-
-Check what is running inside `kube-system`:
-```bash
-kubectl get pods -n kube-system
-```
-
-These are the control plane components keeping your cluster alive. Do not touch them.
-
-**Verify:** How many pods are running in `kube-system`?
-
----
-
-### Task 2: Create and Use Custom Namespaces
-Create two namespaces — one for a development environment and one for staging:
-
-```bash
-kubectl create namespace dev
-kubectl create namespace staging
-```
-
-Verify they exist:
-```bash
-kubectl get namespaces
-```
-
-You can also create a namespace from a manifest:
 ```yaml
-# namespace.yaml
 apiVersion: v1
-kind: Namespace
+kind: Pod
 metadata:
-  name: production
-```
-
-```bash
-kubectl apply -f namespace.yaml
-```
-
-Now run a pod in a specific namespace:
-```bash
-kubectl run nginx-dev --image=nginx:latest -n dev
-kubectl run nginx-staging --image=nginx:latest -n staging
-```
-
-List pods across all namespaces:
-```bash
-kubectl get pods -A
-```
-
-Notice that `kubectl get pods` without `-n` only shows the `default` namespace. You must specify `-n <namespace>` or use `-A` to see everything.
-
-**Verify:** Does `kubectl get pods` show these pods? What about `kubectl get pods -A`?
-
----
-
-### Task 3: Create Your First Deployment
-A Deployment tells Kubernetes: "I want X replicas of this Pod running at all times." If a Pod crashes, the Deployment controller recreates it automatically.
-
-Create a file `nginx-deployment.yaml`:
-
-```yaml
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: nginx-deployment
-  namespace: dev
+  name: nginx-pod
   labels:
     app: nginx
 spec:
-  replicas: 3
-  selector:
-    matchLabels:
-      app: nginx
-  template:
-    metadata:
-      labels:
-        app: nginx
-    spec:
-      containers:
-      - name: nginx
-        image: nginx:1.24
-        ports:
-        - containerPort: 80
+  containers:
+  - name: nginx
+    image: nginx:latest
+    ports:
+    - containerPort: 80
 ```
-
-Key differences from a standalone Pod:
-- `kind: Deployment` instead of `kind: Pod`
-- `apiVersion: apps/v1` instead of `v1`
-- `replicas: 3` tells Kubernetes to maintain 3 identical pods
-- `selector.matchLabels` connects the Deployment to its Pods
-- `template` is the Pod template — the Deployment creates Pods using this blueprint
 
 Apply it:
 ```bash
-kubectl apply -f nginx-deployment.yaml
+kubectl apply -f nginx-pod.yaml
 ```
 
-Check the result:
+Verify:
 ```bash
-kubectl get deployments -n dev
-kubectl get pods -n dev
+kubectl get pods
+kubectl get pods -o wide
 ```
 
-You should see 3 pods with names like `nginx-deployment-xxxxx-yyyyy`.
+Wait until the STATUS shows `Running`. Then explore:
+```bash
+# Detailed info about the pod
+kubectl describe pod nginx-pod
 
-**Verify:** What do the READY, UP-TO-DATE, and AVAILABLE columns mean in the deployment output?
+# Read the logs
+kubectl logs nginx-pod
+
+# Get a shell inside the container
+kubectl exec -it nginx-pod -- /bin/bash
+
+# Inside the container, run:
+curl localhost:80
+exit
+```
+
+**Verify:** Can you see the Nginx welcome page when you curl from inside the pod?
 
 ---
 
-### Task 4: Self-Healing — Delete a Pod and Watch It Come Back
-This is the key difference between a Deployment and a standalone Pod.
+### Task 2: Create a Custom Pod (BusyBox)
+Write a new manifest `busybox-pod.yaml` from scratch (do not copy-paste the nginx one):
 
-```bash
-# List pods
-kubectl get pods -n dev
-
-# Delete one of the deployment's pods (use an actual pod name from your output)
-kubectl delete pod <pod-name> -n dev
-
-# Immediately check again
-kubectl get pods -n dev
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: busybox-pod
+  labels:
+    app: busybox
+    environment: dev
+spec:
+  containers:
+  - name: busybox
+    image: busybox:latest
+    command: ["sh", "-c", "echo Hello from BusyBox && sleep 3600"]
 ```
 
-The Deployment controller detects that only 2 of 3 desired replicas exist and immediately creates a new one. The deleted pod is replaced within seconds.
+Apply and verify:
+```bash
+kubectl apply -f busybox-pod.yaml
+kubectl get pods
+kubectl logs busybox-pod
+```
 
-**Verify:** Is the replacement pod's name the same as the one you deleted, or different?
+Notice the `command` field — BusyBox does not run a long-lived server like Nginx. Without a command that keeps it running, the container would exit immediately and the pod would go into `CrashLoopBackOff`.
+
+**Verify:** Can you see "Hello from BusyBox" in the logs?
 
 ---
 
-### Task 5: Scale the Deployment
-Change the number of replicas:
+### Task 3: Imperative vs Declarative
+You have been using the declarative approach (writing YAML, then `kubectl apply`). Kubernetes also supports imperative commands:
 
 ```bash
-# Scale up to 5
-kubectl scale deployment nginx-deployment --replicas=5 -n dev
-kubectl get pods -n dev
+# Create a pod without a YAML file
+kubectl run redis-pod --image=redis:latest
 
-# Scale down to 2
-kubectl scale deployment nginx-deployment --replicas=2 -n dev
-kubectl get pods -n dev
+# Check it
+kubectl get pods
 ```
 
-Watch how Kubernetes creates or terminates pods to match the desired count.
+Now extract the YAML that Kubernetes generated:
+```bash
+kubectl get pod redis-pod -o yaml
+```
 
-You can also scale by editing the manifest — change `replicas: 4` in your YAML file and run `kubectl apply -f nginx-deployment.yaml` again.
+Compare this output with your hand-written manifests. Notice how much extra metadata Kubernetes adds automatically (status, timestamps, uid, resource version).
 
-**Verify:** When you scaled down from 5 to 2, what happened to the extra pods?
+You can also use dry-run to generate YAML without creating anything:
+```bash
+kubectl run test-pod --image=nginx --dry-run=client -o yaml
+```
+
+This is a powerful trick — use it to quickly scaffold a manifest, then customize it.
+
+**Verify:** Save the dry-run output to a file and compare its structure with your nginx-pod.yaml. What fields are the same? What is different?
 
 ---
 
-### Task 6: Rolling Update
-Update the Nginx image version to trigger a rolling update:
+### Task 4: Validate Before Applying
+Before applying a manifest, you can validate it:
 
 ```bash
-kubectl set image deployment/nginx-deployment nginx=nginx:1.25 -n dev
+# Check if the YAML is valid without actually creating the resource
+kubectl apply -f nginx-pod.yaml --dry-run=client
+
+# Validate against the cluster's API (server-side validation)
+kubectl apply -f nginx-pod.yaml --dry-run=server
 ```
 
-Watch the rollout in real time:
-```bash
-kubectl rollout status deployment/nginx-deployment -n dev
-```
+Now intentionally break your YAML (remove the `image` field or add an invalid field) and run dry-run again. See what error you get.
 
-Kubernetes replaces pods one by one — old pods are terminated only after new ones are healthy. This means zero downtime.
-
-Check the rollout history:
-```bash
-kubectl rollout history deployment/nginx-deployment -n dev
-```
-
-Now roll back to the previous version:
-```bash
-kubectl rollout undo deployment/nginx-deployment -n dev
-kubectl rollout status deployment/nginx-deployment -n dev
-```
-
-Verify the image is back to the previous version:
-```bash
-kubectl describe deployment nginx-deployment -n dev | grep Image
-```
-
-**Verify:** What image version is running after the rollback?
+**Verify:** What error does Kubernetes give when the image field is missing?
 
 ---
 
-### Task 7: Clean Up
-```bash
-kubectl delete deployment nginx-deployment -n dev
-kubectl delete pod nginx-dev -n dev
-kubectl delete pod nginx-staging -n staging
-kubectl delete namespace dev staging production
-```
-
-Deleting a namespace removes everything inside it. Be very careful with this in production.
+### Task 5: Pod Labels and Filtering
+Labels are how Kubernetes organizes and selects resources. You added labels in your manifests — now use them:
 
 ```bash
-kubectl get namespaces
-kubectl get pods -A
+# List all pods with their labels
+kubectl get pods --show-labels
+
+# Filter pods by label
+kubectl get pods -l app=nginx
+kubectl get pods -l environment=dev
+
+# Add a label to an existing pod
+kubectl label pod nginx-pod environment=production
+
+# Verify
+kubectl get pods --show-labels
+
+# Remove a label
+kubectl label pod nginx-pod environment-
 ```
 
-**Verify:** Are all your resources gone?
+Write a manifest for a third pod with at least 3 labels (app, environment, team). Apply it and practice filtering.
+
+---
+
+### Task 6: Clean Up
+Delete all the pods you created:
+
+```bash
+# Delete by name
+kubectl delete pod nginx-pod
+kubectl delete pod busybox-pod
+kubectl delete pod redis-pod
+
+# Or delete using the manifest file
+kubectl delete -f nginx-pod.yaml
+
+# Verify everything is gone
+kubectl get pods
+```
+
+Notice that when you delete a standalone Pod, it is gone forever. There is no controller to recreate it. This is why in production you use Deployments (coming on Day 52) instead of bare Pods.
 
 ---
 
 ## Hints
-- `kubectl get <resource> -n <namespace>` — target a specific namespace
-- `kubectl get <resource> -A` — list resources across all namespaces
-- `selector.matchLabels` in a Deployment must match `template.metadata.labels` — if they do not match, the Deployment will not manage the Pods
-- `kubectl scale deployment <name> --replicas=N` — quick way to scale
-- `kubectl set image` updates a container image without editing the YAML
-- `kubectl rollout undo` rolls back to the previous revision
-- `kubectl rollout history` shows past revisions of a Deployment
-- Deployments create ReplicaSets behind the scenes — you can see them with `kubectl get replicasets -n <namespace>`
+- `kubectl apply -f` creates or updates a resource from a file
+- `kubectl get pods -o wide` shows the node and IP address
+- `kubectl describe pod <name>` shows events — very useful for debugging
+- `kubectl logs <name>` shows container stdout/stderr
+- `kubectl exec -it <name> -- /bin/sh` gives you a shell (use `/bin/sh` if `/bin/bash` is not available)
+- Labels are just key-value pairs — they have no meaning to Kubernetes itself, only to selectors
+- `--dry-run=client -o yaml` is your best friend for generating manifest templates
 
 ---
 
 ## Documentation
-Create `day-52-namespaces-deployments.md` with:
-- What namespaces are and why you would use them
-- Your Deployment manifest and an explanation of each section
-- What happens when you delete a Pod managed by a Deployment vs a standalone Pod
-- How scaling works (both imperative and declarative)
-- How rolling updates and rollbacks work
-- Screenshot of your Deployment and Pods running
+Create `day-51-pods.md` with:
+- The four required fields of a Kubernetes manifest and what each does
+- Your nginx, busybox, and third pod manifests
+- Difference between imperative (`kubectl run`) and declarative (`kubectl apply -f`)
+- Screenshot of your pods running
+- What happens when you delete a standalone Pod?
 
 ---
 
 ## Submission
-1. Add `day-52-namespaces-deployments.md` and your YAML files to `2026/day-52/`
+1. Add `day-51-pods.md` and your YAML files to `2026/day-51/`
 2. Commit and push to your fork
 
 ---
 
 ## Learn in Public
-Share on LinkedIn: "Learned Kubernetes Namespaces and Deployments today. Created self-healing deployments, scaled them up and down, and performed a zero-downtime rolling update with rollback."
+Share on LinkedIn: "Wrote my first Kubernetes Pod manifests from scratch today. Created pods, got a shell inside them, and learned the difference between imperative and declarative approaches."
 
 `#90DaysOfDevOps` `#DevOpsKaJosh` `#TrainWithShubham`
 
