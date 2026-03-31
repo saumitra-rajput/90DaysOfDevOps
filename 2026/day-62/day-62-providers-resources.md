@@ -1,6 +1,5 @@
 # Day 62 -- Providers, Resources and Dependencies
 
-<<<<<<< HEAD
 ## Task
 Yesterday you created standalone resources. But real infrastructure is connected -- a server lives inside a subnet, a subnet lives inside a VPC, a security group controls what traffic gets in. Today you build a complete networking stack on AWS and learn how Terraform figures out what to create first.
 
@@ -27,7 +26,8 @@ Understanding dependencies is what separates a Terraform beginner from someone w
 
 **Document:** What does `~> 5.0` mean? How is it different from `>= 5.0` and `= 5.0.0`?
 
-![alt text](image.png)
+![alt text](image-2.png)
+
 ---
 
 ### Task 2: Build a VPC from Scratch
@@ -42,11 +42,11 @@ Create a `main.tf` and define these resources one by one:
 Run `terraform plan` -- you should see 5 resources to create.
 
 **Verify:** Apply and check the AWS VPC console. Can you see all five resources connected?
+![alt text](image-3.png)
+
 ![alt text](image-1.png)
 
-
-![alt text](image-2.png)
-![alt text](image-3.png)
+![alt text](image.png)
 ---
 
 ### Task 3: Understand Implicit Dependencies
