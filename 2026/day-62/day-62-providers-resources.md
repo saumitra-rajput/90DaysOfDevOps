@@ -53,14 +53,53 @@ Run `terraform plan` -- you should see 5 resources to create.
 Look at your `main.tf` carefully:
 
 1. The subnet references `aws_vpc.main.id` -- this is an implicit dependency
+
+By referencing aws_vpc.main.id, Terraform understands the subnet depends on the VPC.
+
+Terraform builds a dependency graph internally and ensures the VPC is created first, then the subnet.
+
 2. The internet gateway references the VPC ID -- another implicit dependency
+
+This is because the subnet requires a valid VPC ID to attach to.
+
+Without the VPC being created first, the subnet cannot be provisioned.
+
 3. The route table association references both the route table and the subnet
 
+AWS Resource Dependencies
+
+Resource Implicit Dependencies
+
+| Resource | Implicit Dependencies |
+|----------|---------------------|
+| `aws_vpc.main` | none |
+| `aws_subnet.public` | `aws_vpc.main` |
+| `aws_internet_gateway.igw` | `aws_vpc.main` |
+| `aws_route_table.public` | `aws_vpc.main` |
+| `aws_route_table_association.public` | `aws_subnet.public`, `aws_route_table.public` |
+
+---
+
+Dependency Flow
+
+```
+Subnet → VPC
+Internet Gateway → VPC
+Route Table → VPC
+Route Table Association → Subnet + Route Table
+```
 Answer these questions:
 - How does Terraform know to create the VPC before the subnet?
+
+How Terraform knows: The subnet references aws_vpc.main.id, so Terraform automatically creates the VPC first.
 - What would happen if you tried to create the subnet before the VPC existed?
+
+If subnet created first: Terraform would fail with an error because the VPC ID doesn’t exist yet.
 - Find all implicit dependencies in your config and list them
 
+Implicit dependencies:
+
+aws_subnet → aws_vpc
 ---
 
 ### Task 4: Add a Security Group and EC2 Instance
@@ -102,7 +141,17 @@ and paste the output into an online Graphviz viewer.
 
 **Document:** When would you use `depends_on` in real projects? Give two examples.
 
+![alt text](image-4.png)
+
+
+
+![alt text](image-5.png)
+
+![alt text](image-6.png)
+
+![alt text](image-7.png)
 ---
+
 
 ### Task 6: Lifecycle Rules and Destroy
 1. Add a `lifecycle` block to your EC2 instance:
@@ -110,16 +159,48 @@ and paste the output into an online Graphviz viewer.
 lifecycle {
   create_before_destroy = true
 }
+
+
+What it does: Creates a new resource before destroying the old one
+When to use:
+
+Avoid downtime
+
+Example: Updating an EC2 instance or load balancer without interruption
+
 ```
 2. Change the AMI ID to a different one and run `terraform plan` -- observe that Terraform plans to create the new instance before destroying the old one
+
+What it does: Prevents Terraform from accidentally deleting a resource
+When to use:
+
+Critical resources
+
+Example: Production database, S3 bucket with important data
 
 3. Destroy everything:
 ```bash
 terraform destroy
 ```
-4. Watch the destroy order -- Terraform destroys in reverse dependency order. Verify in the AWS console that everything is cleaned up.
 
-**Document:** What are the three lifecycle arguments (`create_before_destroy`, `prevent_destroy`, `ignore_changes`) and when would you use each?
+What it does: Tells Terraform to ignore specific attribute changes
+When to use:
+
+When something is modified outside Terraform
+Example:
+
+Auto-scaled EC2 instances
+
+Tags modified manually in AWS console
+
+ter
+Summary
+
+create_before_destroy → avoid downtime
+
+prevent_destroy → protect critical resources
+
+ignore_changes → avoid unnecessary updates
 
 ---
 
