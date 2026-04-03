@@ -145,7 +145,7 @@ terraform apply
 ```
 
 **Verify:** Two EC2 instances running, same security group, different names. Check the AWS console.
-
+![alt text](image.png)
 ---
 
 ### Task 5: Use a Public Registry Module
@@ -179,7 +179,7 @@ terraform init     # Downloads the registry module
 terraform plan
 terraform apply
 ```
-
+![alt text](image-1.png)
 4. Compare: how many resources did the VPC module create vs your hand-written VPC from Day 62?
 
 **Document:** Where does Terraform download registry modules to? Check `.terraform/modules/`.
@@ -198,12 +198,14 @@ terraform apply
 ```bash
 terraform state list
 ```
+![alt text](image-2.png)
 Notice the `module.vpc.`, `module.web_server.`, `module.web_sg.` prefixes.
 
 4. Destroy everything:
 ```bash
 terraform destroy
 ```
+![alt text](image-3.png)
 
 **Document:** Write down five module best practices:
 - Always pin versions for registry modules
